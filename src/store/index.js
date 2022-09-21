@@ -1,10 +1,9 @@
 import { createStore, combineReducers } from "redux";
 
 export const initialState = {
-  name: [
-    { id: 1,
-    user: ""}
+  names: [ "pippo", "pluto"
   ],
+  ids: "2",
   count: {
     value: 0,
     default: 100
@@ -40,15 +39,18 @@ function nameReducer(state={}, action) {
   switch(action.type) {
     case 'SET_PIPPO':
       return { ...state, userName: action.payload }
-      case "AddName":
-        return {...state, name: state.name.push({id:2, user: "pippo"})}
-             
+
+    case "AddName":
+      let names = state.names
+      let id = state.ids
+        return { ...state =  [...names, ...id] + action.payload}    
+
     default:
       return state
   }
 }
 
-const rootReducer = combineReducers({count: countReducer, user: userReducer, name: nameReducer})
+const rootReducer = combineReducers({count: countReducer, user: userReducer, names: nameReducer, ids:nameReducer})
 const store = createStore(rootReducer, initialState);
 
 export default store;
